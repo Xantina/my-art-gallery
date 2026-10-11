@@ -56,8 +56,11 @@ export const PricingSection = () => {
             <p className="text-muted-foreground mb-6 leading-relaxed">
               Please provide <span className="bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent italic">visually</span> clear and detailed references to ensure the best possible outcome for your commission. The more references the better! I will not work off of written descriptions alone.
             </p>
-            <p className="text-muted-foreground leading-relaxed">
+            <p className="text-muted-foreground mb-6 leading-relaxed">
               Complex armor, weapons, or other intricate details may incur additional charges. Any extra characters, mounts, or pets will add <span className="bg-gradient-to-r from-pink-400 to-pink-600 bg-clip-text text-transparent">25-50%</span> to the base price. Final price will be agreed upon before starting the commission.
+            </p>
+            <p className="text-muted-foreground leading-relaxed">
+              <span className="bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent">No AI</span> is used to create any artwork. All commissions are hand-drawn by me.
             </p>
           </motion.div>
 
