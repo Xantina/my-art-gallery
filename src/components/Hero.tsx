@@ -17,14 +17,13 @@ export const Hero = () => {
       {/* Content */}
       <div className="relative z-10 container mx-auto px-6 text-center">
         <p className="text-gold text-sm tracking-[0.3em] uppercase mb-4 animate-fade-up opacity-0 stagger-1">
-          Original Artworks & Portraits
+          Original Artworks by
         </p>
-        <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-light text-foreground mb-6 animate-fade-up opacity-0 stagger-2">
-          Art That <span className="text-gradient italic">Speaks</span>
+        <h1 className="intro-title mb-6">
+        <span className="text">Xantina</span>
         </h1>
         <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto mb-10 animate-fade-up opacity-0 stagger-3">
-          Discover a curated collection of original drawings, portraits, and paintings. 
-          Each piece tells a unique story, available for download and sharing.
+          A hobby artist exploring the boundaries of creativity and imagination through their love of the fantasy world.
         </p>
         <Link 
           to="/gallery"

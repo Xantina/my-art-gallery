@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
+import xantinaLogo from '@/assets/Xantina Logo.png';
 
 interface IntroAnimationProps {
   onComplete: () => void;
@@ -78,9 +79,13 @@ export const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
       
       {/* Main content */}
       <div className="intro-content">
-        <div className="intro-line" />
-        <h1 className="intro-title">Gallery</h1>
-        <p className="intro-subtitle">Original Artworks & Portraits</p>
+                <img
+          src={xantinaLogo}
+          alt="Xantina Logo"
+          className="intro-logo mx-auto w-64 md:w-96 h-auto"
+         />
+         <div className="intro-line" />
+        <p className="intro-subtitle">Original Artworks</p>
       </div>
     </div>
   );

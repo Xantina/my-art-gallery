@@ -8,11 +8,7 @@ const XIcon = ({ size = 18 }: { size?: number }) => (
 
 export const Footer = () => {
   const socialLinks = [
-    { icon: Github, href: 'https://github.com', label: 'GitHub' },
-    { icon: XIcon, href: 'https://x.com', label: 'X' },
-    { icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
-    { icon: Instagram, href: 'https://instagram.com', label: 'Instagram' },
-    { icon: Facebook, href: 'https://facebook.com', label: 'Facebook' },
+  
   ];
 
   return (
@@ -20,7 +16,7 @@ export const Footer = () => {
       <div className="container mx-auto px-6">
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-muted-foreground text-sm">
-            © 2024 Gallery. All rights reserved.
+            © 2026 Gallery. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
             {socialLinks.map(({ icon: Icon, href, label }) => (

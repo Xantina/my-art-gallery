@@ -6,9 +6,10 @@ interface ArtworkCardProps {
   artwork: Artwork;
   onView: (artwork: Artwork) => void;
   index: number;
+  thumbnail: string;
 }
 
-export const ArtworkCard = ({ artwork, onView, index }: ArtworkCardProps) => {
+export const ArtworkCard = ({ artwork, onView, index, thumbnail }: ArtworkCardProps) => {
   return (
     <div 
       className="artwork-card group cursor-pointer opacity-0 animate-fade-up"
@@ -17,7 +18,9 @@ export const ArtworkCard = ({ artwork, onView, index }: ArtworkCardProps) => {
     >
       <div className="relative aspect-[1/1.414] overflow-hidden">
         <img
-          src={artwork.image}
+          src={thumbnail}
+          loading="lazy"
+          decoding="async"
           alt={artwork.title}
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
         />
@@ -32,7 +35,7 @@ export const ArtworkCard = ({ artwork, onView, index }: ArtworkCardProps) => {
               {artwork.title}
             </h3>
             <p className="text-muted-foreground text-sm">
-              {artwork.medium}, {artwork.year}
+              {artwork.date}
             </p>
             
             {/* Quick actions */}

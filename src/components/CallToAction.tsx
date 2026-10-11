@@ -25,7 +25,6 @@ export const CallToAction = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              Let's Connect
             </motion.p>
             <motion.h2 
               className="font-display text-3xl md:text-4xl lg:text-5xl text-foreground mb-6"
@@ -34,7 +33,7 @@ export const CallToAction = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
-              Interested in a <span className="text-gradient italic">Commission</span>?
+              Interested in a <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent italic">Commission</span>?
             </motion.h2>
             <motion.p 
               className="text-muted-foreground max-w-2xl mx-auto mb-10"
@@ -43,8 +42,7 @@ export const CallToAction = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
-              Whether you're looking for a custom portrait, a unique piece for your space, 
-              or simply want to discuss art, I'd love to hear from you.
+              Make sure to read over my <span className="bg-gradient-to-r from-green-400 to-green-600 bg-clip-text text-transparent">Terms of Service</span> before requesting a commission.
             </motion.p>
             <motion.div 
               className="flex flex-col sm:flex-row gap-4 justify-center"

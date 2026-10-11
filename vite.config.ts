@@ -20,7 +20,7 @@ export default defineConfig({
         clientsClaim: true,
       },
       manifest: {
-        name: 'Bhanu Art Gallery',
+        name: 'Xantina Art Gallery',
         short_name: 'Art Gallery',
         start_url: '/',
         display: 'standalone',
