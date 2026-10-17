@@ -82,7 +82,7 @@ export const TermsofService = () => {
           </section>
           <section className="space-y-5">
             <h2 className="font-display text-2xl md:text-3xl text-foreground">
-              2. Product Delivery
+              2. PRODUCT &amp; DELIVERY
             </h2>
             <ul className="list-disc space-y-3 pl-6 marker:text-gold">
               <li>

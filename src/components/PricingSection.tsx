@@ -45,7 +45,7 @@ export const PricingSection = () => {
           >
               <p className="font-display text-2xl text-gold mb-4">
               <b>Please Note:</b> I cannot guarantee a solid deadline as I have a full
-                 time job that takes priority.
+                 time job that takes priority. I strive to give my all in each commission; please remain patient throughout the creative process.
               </p>
             <h2 className="font-display text-4xl md:text-5xl text-foreground mb-6">
             <span className="text-gradient italic">Pricing</span>
