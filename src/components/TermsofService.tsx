@@ -10,7 +10,7 @@ export const TermsofService = () => {
             Terms of <span className="text-gradient italic">Service</span>
           </h1>
           <p className="text-gold text-sm mb-6">
-            Last Updated: <time dateTime="2026-10-08">10/08/2026</time>
+            Last Updated: <time dateTime="2026-10-19">10/19/2026</time>
           </p>
           <p className="text-muted-foreground leading-relaxed">
             By commissioning me, the Client agrees to the legally binding terms
@@ -19,7 +19,7 @@ export const TermsofService = () => {
         </header>
         <div className="space-y-10 text-muted-foreground leading-relaxed">
           <section className="space-y-5">
-            <h2 className="font-display text-2xl md:text-3xl text-foreground">
+            <h2 className="font-display text-2xl text-gold md:text-3xl text-foreground">
               1. ACCEPTANCE &amp; SCOPE OF WORK
             </h2>
             <ul className="list-disc space-y-3 pl-6 marker:text-gold">
@@ -27,15 +27,15 @@ export const TermsofService = () => {
                 <strong className="font-semibold text-foreground">
                   Right of Refusal:
                 </strong>{" "}
-                I am not obligated to accept any commission request and reserves
-                the right to decline any request without explaining the reason.
+                I am not obligated to accept any commission request and reserve
+                the right to decline any requests without explaining the reason.
               </li>
               <li>
                 <strong className="font-semibold text-foreground">
                   Accept or Decline:
                 </strong>{" "}
                 Once I receive notification of a Client’s commission request, I
-                will review the details and notify the Client via Email on if I
+                will review the details and notify the Client by Email on if I
                 accept or decline.
               </li>
               <li>
@@ -81,7 +81,7 @@ export const TermsofService = () => {
             </ul>
           </section>
           <section className="space-y-5">
-            <h2 className="font-display text-2xl md:text-3xl text-foreground">
+            <h2 className="font-display text-2xl text-gold md:text-3xl text-foreground">
               2. PRODUCT &amp; DELIVERY
             </h2>
             <ul className="list-disc space-y-3 pl-6 marker:text-gold">
@@ -106,7 +106,7 @@ export const TermsofService = () => {
             </ul>
           </section>
           <section className="space-y-5">
-            <h2 className="font-display text-2xl md:text-3xl text-foreground">
+            <h2 className="font-display text-2xl text-gold md:text-3xl text-foreground">
               3. WORKFLOW &amp; REVISIONS
             </h2>
             <ul className="list-disc space-y-3 pl-6 marker:text-gold">
@@ -116,7 +116,7 @@ export const TermsofService = () => {
                 </strong>{" "}
                 I will provide a quick, rough sketch. Once the Client approves
                 this sketch, work will resume only after the initial required
-                payment is received.
+                payment is received. <b className="text-gold text-sm mb-6">This does not apply to the Surprise Me! Sketch option.</b>
               </li>
               <li>
                 <strong className="font-semibold text-foreground">
@@ -124,7 +124,7 @@ export const TermsofService = () => {
                 </strong>{" "}
                 A reasonable amount of minor revisions (small details, a color
                 change, etc) are available during the detailed sketch, lineart
-                and flat color phase for free.
+                and flat color phase for free. <b className="text-gold text-sm mb-6">This does not apply to the Surprise Me! Sketch option.</b>
                 <div className="mt-3">
                   <ul className="list-disc space-y-3 pl-6 marker:text-gold">
                     <li>
@@ -134,7 +134,7 @@ export const TermsofService = () => {
                       result in a case-by-case proportional increase of order
                       value. Any such increase will be invoiced separately. Work
                       on any such excessive requests will not commence until the
-                      payment for the additional invoice(s) has been received.
+                      payment for the additional invoice(s) has been received. 
                     </li>
                   </ul>
                 </div>
@@ -159,7 +159,7 @@ export const TermsofService = () => {
             </ul>
           </section>
           <section className="space-y-5">
-            <h2 className="font-display text-2xl md:text-3xl text-foreground">
+            <h2 className="font-display text-2xl text-gold  md:text-3xl text-foreground">
               4. PAYMENT METHODS &amp; PROCESS
             </h2>
             <ul className="list-disc space-y-3 pl-6 marker:text-gold">
@@ -198,7 +198,7 @@ export const TermsofService = () => {
             </ul>
           </section>
           <section className="space-y-5">
-            <h2 className="font-display text-2xl md:text-3xl text-foreground">
+            <h2 className="font-display text-2xl text-gold  md:text-3xl text-foreground">
               5. INTELLECTUAL PROPERTY &amp; USAGE RIGHTS
             </h2>
             <h3 className="font-display text-xl text-foreground pt-3">
@@ -292,7 +292,7 @@ export const TermsofService = () => {
             </ul>
           </section>
           <section className="space-y-5">
-            <h2 className="font-display text-2xl md:text-3xl text-foreground">
+            <h2 className="font-display text-2xl text-gold md:text-3xl text-foreground">
               6. CANCELLATIONS
             </h2>
             <ul className="list-disc space-y-3 pl-6 marker:text-gold">
@@ -316,7 +316,7 @@ export const TermsofService = () => {
             </ul>
           </section>
           <section className="space-y-5">
-            <h2 className="font-display text-2xl md:text-3xl text-foreground">
+            <h2 className="font-display text-2xl text-gold md:text-3xl text-foreground">
               7. REFUNDS
             </h2>
             <p>
