@@ -12,7 +12,7 @@ export const PricingSection = () => {
       imageScale: '75%',
       title: 'Surprise Me! Sketch',
       price: '$25.00',
-      description: 'You send me your reference images. I pick the pose and create a non-colored sketch of your character. There are no revisions for this option, unless I miss a key detail of your character. Intricate details may be simplified or omitted.'
+      description: 'I pick the pose and create a non-colored sketch of your character. There are no revisions for this option, unless I miss a key detail of your character. Intricate details may be simplified or omitted.'
     },
     {
       image: bustIcon,
