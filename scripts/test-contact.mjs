@@ -121,7 +121,7 @@ const response = await good.send({
 });
 assert.equal(response.status, 200);
 assert.deepEqual(await response.json(), { success: true });
-assert.equal(good.calls[1].body.to[0], 'cheyroach@gmail.com');
+assert.equal(good.calls[1].body.to[0], 'xantina@xantina.art');
 assert.equal(good.calls[1].body.reply_to, 'client@example.com');
 assert.equal(good.calls[1].body.attachments[0].filename, '1-reference.png');
 assert(good.calls[1].body.html.includes('&lt;b&gt;Hello&lt;/b&gt;'));

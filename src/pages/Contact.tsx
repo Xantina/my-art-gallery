@@ -6,7 +6,7 @@ import { Send, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { ContactVerification } from '@/components/ContactVerification';
 
-const CONTACT_EMAIL = 'cheyroach@gmail.com';
+const CONTACT_EMAIL = 'xantina@xantina.art';
 
 const readImage = (file: File): Promise<{ filename: string; content: string }> =>
   new Promise((resolve, reject) => {

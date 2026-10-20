@@ -56,7 +56,7 @@ export function ContactVerification({ onToken, resetKey }: {
     let api: TurnstileApi | undefined;
     onToken('');
     if (!sitekey || (import.meta.env.PROD && /^[123]x00000000000000000000/.test(sitekey))) {
-      setStatus('Verification is unavailable. Please email cheyroach@gmail.com.');
+      setStatus('Verification is unavailable. Please email xantina@xantina.art.');
       return;
     }
     setStatus('Loading verification…');
@@ -80,12 +80,12 @@ export function ContactVerification({ onToken, resetKey }: {
         'error-callback': () => {
           if (disposed) return;
           onToken('');
-          setStatus('Verification failed to load. Try again or email cheyroach@gmail.com.');
+          setStatus('Verification failed to load. Try again or email xantina@xantina.art.');
         },
       });
       setStatus('Please complete the verification before sending.');
     }).catch(() => {
-      if (!disposed) setStatus('Verification failed to load. Try again or email cheyroach@gmail.com.');
+      if (!disposed) setStatus('Verification failed to load. Try again or email xantina@xantina.art.');
     });
     return () => {
       disposed = true;

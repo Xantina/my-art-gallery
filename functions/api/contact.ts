@@ -17,7 +17,7 @@ interface ContactFields {
   message: string;
 }
 
-const CONTACT_RECIPIENT = 'cheyroach@gmail.com';
+const CONTACT_RECIPIENT = 'xantina@xantina.art';
 const MAX_ATTACHMENT_BYTES = 5 * 1024 * 1024;
 const MAX_TOTAL_ATTACHMENT_BYTES = 10 * 1024 * 1024;
 const MAX_REQUEST_CHARACTERS = 15 * 1024 * 1024;

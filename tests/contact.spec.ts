@@ -33,7 +33,7 @@ test('verification, failure preservation, retry, expiry, cleanup and mobile fit'
     await route.fulfill({ status: attempts === 1 ? 403 : 200, contentType: 'application/json', body: JSON.stringify(attempts === 1 ? { error: 'Verification failed or expired. Please verify again.' } : { success: true }) });
   });
   await page.goto('/contact');
-  await expect(page.getByRole('link', { name: 'cheyroach@gmail.com' })).toHaveAttribute('href', 'mailto:cheyroach@gmail.com');
+  await expect(page.getByRole('link', { name: 'xantina@xantina.art' })).toHaveAttribute('href', 'mailto:xantina@xantina.art');
   const submit = page.getByRole('button', { name: 'Send Message' });
   await expect(submit).toBeDisabled();
   await page.getByLabel('Name', { exact: true }).fill('Client');
@@ -77,7 +77,7 @@ test('script failure gives fallback and can retry', async ({ page }) => {
     return attempts === 1 ? route.abort() : route.fulfill({ contentType: 'application/javascript', body: widgetScript });
   });
   await page.goto('/contact');
-  await expect(page.getByRole('status')).toContainText('cheyroach@gmail.com');
+  await expect(page.getByRole('status')).toContainText('xantina@xantina.art');
   await expect(page.getByRole('button', { name: 'Send Message' })).toBeDisabled();
   await page.getByRole('button', { name: 'Retry verification' }).click();
   await page.getByRole('button', { name: 'Mock verify' }).click();
