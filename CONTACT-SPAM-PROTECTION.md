@@ -1,6 +1,6 @@
 # Contact form deployment and spam protection
 
-The contact form posts JSON to the same-origin Cloudflare Pages Function at `POST /api/contact`. The Function validates the request, verifies Turnstile, and calls Resend over HTTPS. The recipient is fixed in `functions/api/contact.ts`; the visitor's validated email address is used only as `Reply-To`.
+The contact form posts JSON to the same-origin endpoint at `POST /api/contact`. The shared handler in `functions/api/contact.ts` validates the request, verifies Turnstile, and calls Resend over HTTPS. It is exposed both as a Pages Function and through `worker/index.ts` for the site's current Workers Builds deployment. The recipient is fixed server-side; the visitor's validated email address is used only as `Reply-To`.
 
 ## Why this uses Resend instead of Cloudflare Email Sending
 
@@ -32,7 +32,7 @@ The widget sends the action `contact`. The Function requires Siteverify to retur
 
 Never use `VITE_` for `RESEND_API_KEY` or `TURNSTILE_SECRET_KEY`. Vite exposes all `VITE_` values to browser code.
 
-In Cloudflare, set runtime values for each environment that should accept submissions: **Workers & Pages → this Pages project → Settings → Variables and Secrets**. Production and preview configuration are separate. Redeploy after changing bindings, variables, or secrets.
+In Cloudflare, set runtime values for each environment that should accept submissions: **Workers & Pages → my-art-gallery → Settings → Variables and Secrets**. The current production deployment is a Worker with Static Assets, so set these on the `my-art-gallery` Worker. Production and preview configuration are separate. Redeploy after changing variables or secrets.
 
 ## Free-plan rate limiting
 
@@ -59,16 +59,16 @@ Adjust the threshold if normal use shows false positives. This edge rule uses Cl
 ## Deploy
 
 1. Run the checks listed below.
-2. Keep the Pages build command as `npm run build` and output directory as `dist`.
-3. Deploy through the connected Git integration or Wrangler. Dashboard drag-and-drop/direct upload does not deploy Pages Functions.
+2. Keep the Workers Builds build command as `npm run build`. `wrangler.jsonc` points Cloudflare to `dist`, runs the Worker first for `/api/*`, and retains SPA fallback routing.
+3. Deploy through the connected Git integration or `npx wrangler deploy`. The Worker entrypoint forwards `/api/contact` to the same handler used by Pages Functions.
 4. Configure the production variables and secrets above, then trigger a new deployment.
 5. Open the production contact page, confirm the widget hostname in Turnstile analytics, submit a small test, and confirm that Reply uses the visitor address.
 
-The root-level `functions/api/contact.ts` file maps to `/api/contact` through Pages file-based routing.
+The root-level `functions/api/contact.ts` file maps to `/api/contact` through Pages file-based routing when deployed on Pages. In the current Workers deployment, `worker/index.ts` provides the route and `wrangler.jsonc` prevents the SPA fallback from swallowing `/api/*` requests.
 
 ## Local development and testing
 
-Vite alone serves the UI but does not execute Pages Functions. For a full local Pages runtime:
+Vite alone serves the UI but does not execute the Worker or Pages Functions. For the full local Worker runtime:
 
 1. Put the public development key in ignored `.env.local`:
 
@@ -85,11 +85,11 @@ Vite alone serves the UI but does not execute Pages Functions. For a full local 
    CONTACT_FROM_EMAIL=contact@example.com
    ```
 
-3. Build and start Pages locally:
+3. Build and start the current Worker locally:
 
    ```bash
    npm run build
-   npx wrangler pages dev dist
+   npx wrangler dev
    ```
 
 Use a separate Turnstile widget that allows local hostnames, or Cloudflare's documented dummy site/secret pair. Dummy credentials are accepted by this Function only when its request URL is `localhost` or `127.0.0.1`; deployed hosts reject them. With dummy credentials, keep `localhost` in the allowed-hostname variable. A manual successful submission through Wrangler will call Resend and send mail, so use a development Resend key/account when exercising that path.
