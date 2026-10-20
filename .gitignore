@@ -11,8 +11,9 @@ node_modules
 dist
 dist-ssr
 *.local
+*.tsbuildinfo
 .env
-supabase/functions/.env
+.dev.vars
 test-results/
 playwright-report/
 

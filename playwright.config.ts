@@ -9,8 +9,6 @@ export default defineConfig({
     reuseExistingServer: false,
     env: {
       VITE_TURNSTILE_SITE_KEY: '1x00000000000000000000AA',
-      VITE_SUPABASE_URL: 'https://contact-test.supabase.co',
-      VITE_SUPABASE_PUBLISHABLE_KEY: 'sb_publishable_test',
     },
   },
 });

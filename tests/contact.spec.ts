@@ -24,18 +24,16 @@ test('verification, failure preservation, retry, expiry, cleanup and mobile fit'
     return route.fulfill({ contentType: 'application/javascript', body: widgetScript });
   });
   let attempts = 0;
-  await page.route('https://contact-test.supabase.co/functions/v1/send-contact-email', async route => {
-    if (route.request().method() === 'OPTIONS') {
-      await route.fulfill({ headers: { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': '*' } });
-      return;
-    }
+  await page.route('**/api/contact', async route => {
     attempts++;
     const body = route.request().postDataJSON();
     expect(body.turnstileToken).toContain('test-token-');
     expect(body.attachments).toHaveLength(1);
-    await route.fulfill({ status: attempts === 1 ? 403 : 200, headers: { 'Access-Control-Allow-Origin': '*' }, contentType: 'application/json', body: JSON.stringify(attempts === 1 ? { error: 'Verification failed or expired. Please verify again.' } : { success: true }) });
+    expect(body.website).toBe('');
+    await route.fulfill({ status: attempts === 1 ? 403 : 200, contentType: 'application/json', body: JSON.stringify(attempts === 1 ? { error: 'Verification failed or expired. Please verify again.' } : { success: true }) });
   });
   await page.goto('/contact');
+  await expect(page.getByRole('link', { name: 'cheyroach@gmail.com' })).toHaveAttribute('href', 'mailto:cheyroach@gmail.com');
   const submit = page.getByRole('button', { name: 'Send Message' });
   await expect(submit).toBeDisabled();
   await page.getByLabel('Name', { exact: true }).fill('Client');

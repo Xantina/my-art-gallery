@@ -3,9 +3,10 @@ import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { PageTransition } from '@/components/PageTransition';
 import { Send, Loader2 } from 'lucide-react';
-import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 import { ContactVerification } from '@/components/ContactVerification';
+
+const CONTACT_EMAIL = 'cheyroach@gmail.com';
 
 const readImage = (file: File): Promise<{ filename: string; content: string }> =>
   new Promise((resolve, reject) => {
@@ -23,7 +24,8 @@ const Contact = () => {
     name: '',
     email: '',
     subject: '',
-    message: ''
+    message: '',
+    website: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [turnstileToken, setTurnstileToken] = useState('');
@@ -31,11 +33,6 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!supabase) {
-      toast.error('Contact form unavailable', { description: 'Please email cheyroach@gmail.com to get in touch.' });
-      return;
-    }
-
     if (isSubmitting) return;
     if (!turnstileToken) {
       toast.error('Please complete the verification before sending.');
@@ -53,27 +50,31 @@ const Contact = () => {
       })) throw new Error('Add up to 10 valid HTTPS reference links, one per line.');
 
       const attachments = await Promise.all(referenceFiles.map(readImage));
-      const { error } = await supabase.functions.invoke('send-contact-email', {
-        body: { ...formData, referenceLinks: links, attachments, turnstileToken }
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...formData, referenceLinks: links, attachments, turnstileToken }),
       });
 
-      if (error) {
-        let details = 'Failed to send message. Please try again.';
-        if ('context' in error && error.context instanceof Response && [400, 403, 503].includes(error.context.status)) {
-          const body = await error.context.json().catch(() => null);
+      if (!response.ok) {
+        let details = `Failed to send message. Please try again or email ${CONTACT_EMAIL}.`;
+        if ([400, 403, 413, 429, 500, 503].includes(response.status)) {
+          const body = await response.json().catch(() => null);
           if (typeof body?.error === 'string') details = body.error;
         }
         throw new Error(details);
       }
 
       toast.success('Message sent!', { description: "Thank you for your message. I'll get back to you soon." });
-      setFormData({ name: '', email: '', subject: '', message: '' });
+      setFormData({ name: '', email: '', subject: '', message: '', website: '' });
       setReferenceFiles([]);
       setReferenceLinks('');
       if (fileInput.current) fileInput.current.value = '';
     } catch (error: unknown) {
-      
-      toast.error('Message not sent', { description: error instanceof Error ? error.message : 'Failed to send message. Please email cheyroach@gmail.com.' });
+      const description = error instanceof TypeError
+        ? `The contact form is unavailable. Please email ${CONTACT_EMAIL}.`
+        : error instanceof Error ? error.message : `Failed to send message. Please email ${CONTACT_EMAIL}.`;
+      toast.error('Message not sent', { description });
     } finally {
       setTurnstileToken('');
       setVerificationReset(value => value + 1);
@@ -128,6 +129,7 @@ const Contact = () => {
                       value={formData.name}
                       onChange={handleChange}
                       required
+                      maxLength={100}
                       className="w-full px-4 py-3 rounded-lg bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-gold/50 focus:border-gold transition-all"
                       placeholder="Your name"
                     />
@@ -147,6 +149,7 @@ const Contact = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
+                    maxLength={254}
                     className="w-full px-4 py-3 rounded-lg bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-gold/50 focus:border-gold transition-all"
                     placeholder="Your email"
                   />
@@ -163,6 +166,7 @@ const Contact = () => {
                     value={formData.subject}
                     onChange={handleChange}
                     required
+                    maxLength={200}
                     className="w-full px-4 py-3 rounded-lg bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-gold/50 focus:border-gold transition-all"
                     placeholder="Commission request, question, etc."
                   />
@@ -179,6 +183,7 @@ const Contact = () => {
                     value={formData.message}
                     onChange={handleChange}
                     required
+                    maxLength={10000}
                     rows={5}
                     className="w-full px-4 py-3 rounded-lg bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-gold/50 focus:border-gold transition-all resize-none"
                     placeholder="Tell me about your commission request or inquiry..."
@@ -245,6 +250,19 @@ const Contact = () => {
                   </p>
                 </div>
 
+                <div className="absolute left-[-10000px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
+                  <label htmlFor="website">Leave this field empty</label>
+                  <input
+                    id="website"
+                    name="website"
+                    type="text"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={formData.website}
+                    onChange={handleChange}
+                  />
+                </div>
+
                 <ContactVerification onToken={setTurnstileToken} resetKey={verificationReset} />
 
                 <button
@@ -266,6 +284,10 @@ const Contact = () => {
                 </button>
                 </fieldset>
               </form>
+              <p className="mt-6 text-center text-sm text-muted-foreground">
+                If the form is unavailable, email{' '}
+                <a className="text-gold underline" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
+              </p>
             </div>
           </div>
         </div>
