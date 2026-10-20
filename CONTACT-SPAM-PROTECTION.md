@@ -27,12 +27,12 @@ The widget sends the action `contact`. The Function requires Siteverify to retur
 
 1. In Resend, verify the sender domain and complete its DNS setup.
 2. Add `RESEND_API_KEY` as an encrypted Pages Function secret.
-3. Add `CONTACT_FROM_EMAIL` as a Pages Function variable containing a plain sender address on that verified domain, such as `contact@example.com`. Do not include a display name; the Function adds one.
+3. Confirm `CONTACT_FROM_EMAIL` in `wrangler.jsonc` is a plain sender address on that verified domain. Production currently uses `contact@xantina.art`. Do not include a display name; the Function adds one.
 4. Confirm the fixed destination address in `functions/api/contact.ts` is the intended verified account address. In Resend's restricted/testing mode, the destination must be the account's verified email. With a verified sending domain, use the normal production sending mode.
 
 Never use `VITE_` for `RESEND_API_KEY` or `TURNSTILE_SECRET_KEY`. Vite exposes all `VITE_` values to browser code.
 
-In Cloudflare, set runtime values for each environment that should accept submissions: **Workers & Pages → my-art-gallery → Settings → Variables and Secrets**. The current production deployment is a Worker with Static Assets, so set these on the `my-art-gallery` Worker. Production and preview configuration are separate. Redeploy after changing variables or secrets.
+In Cloudflare, set `RESEND_API_KEY` and `TURNSTILE_SECRET_KEY` as runtime secrets under **Workers & Pages → my-art-gallery → Settings → Variables and Secrets**. The non-secret production hostname and sender values live in `wrangler.jsonc`, which is the deployment source of truth. `keep_vars` preserves any additional dashboard-managed variables. Production and preview configuration are separate. Redeploy after changing variables or secrets.
 
 ## Free-plan rate limiting
 

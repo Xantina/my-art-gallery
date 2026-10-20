@@ -4,6 +4,14 @@
   "main": "worker/index.ts",
   "compatibility_date": "2026-10-19",
   "upload_source_maps": true,
+  "keep_vars": true,
+  "vars": {
+    "TURNSTILE_ALLOWED_HOSTNAMES": "xantina.art,www.xantina.art",
+    "CONTACT_FROM_EMAIL": "contact@xantina.art"
+  },
+  "secrets": {
+    "required": ["RESEND_API_KEY", "TURNSTILE_SECRET_KEY"]
+  },
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
