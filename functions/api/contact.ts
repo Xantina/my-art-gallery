@@ -50,8 +50,9 @@ const escapeHtml = (value: string): string =>
 
 const isEmail = (value: string): boolean => /^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(value);
 
-const configurationUnavailable = () => jsonResponse(503, {
+const configurationUnavailable = (code?: string) => jsonResponse(503, {
   error: `The contact form is unavailable. Please try again or email ${CONTACT_RECIPIENT}.`,
+  ...(code ? { code } : {}),
 });
 
 const isSameOriginRequest = (request: Request): boolean => {
@@ -198,10 +199,17 @@ export const onRequest = async ({ request, env }: PagesContext): Promise<Respons
     const requestHostname = new URL(request.url).hostname.toLowerCase();
     const isLocalRequest = requestHostname === 'localhost' || requestHostname === '127.0.0.1';
     const isTestSecret = secret ? /^[123]x0000000000000000000000000000000AA$/.test(secret) : false;
-    if (!secret || !resendKey || !fromEmail || !isEmail(fromEmail) || /[\r\n]/.test(fromEmail) ||
-        !allowedHosts.length || (isTestSecret && !isLocalRequest)) {
+    if (!secret || !resendKey) {
       console.warn('Contact endpoint configuration unavailable');
-      return configurationUnavailable();
+      return configurationUnavailable('CONTACT_RUNTIME_SECRETS_MISSING');
+    }
+    if (isTestSecret && !isLocalRequest) {
+      console.warn('Production contact endpoint cannot use a Turnstile test secret');
+      return configurationUnavailable('TURNSTILE_TEST_SECRET_NOT_ALLOWED');
+    }
+    if (!fromEmail || !isEmail(fromEmail) || /[\r\n]/.test(fromEmail) || !allowedHosts.length) {
+      console.warn('Contact endpoint configuration invalid');
+      return configurationUnavailable('CONTACT_CONFIGURATION_INVALID');
     }
 
     try {
