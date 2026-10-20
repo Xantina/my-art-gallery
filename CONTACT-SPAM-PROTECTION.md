@@ -32,7 +32,7 @@ The widget sends the action `contact`. The Function requires Siteverify to retur
 
 Never use `VITE_` for `RESEND_API_KEY` or `TURNSTILE_SECRET_KEY`. Vite exposes all `VITE_` values to browser code.
 
-In Cloudflare, set `RESEND_API_KEY` and `TURNSTILE_SECRET_KEY` as runtime secrets under **Workers & Pages → my-art-gallery → Settings → Variables and Secrets**. The non-secret production hostname and sender values live in `wrangler.jsonc`, which is the deployment source of truth. `keep_vars` preserves any additional dashboard-managed variables. Production and preview configuration are separate. Redeploy after changing variables or secrets.
+In Cloudflare, set `RESEND_API_KEY` and `TURNSTILE_SECRET_KEY` as runtime secrets under **Workers & Pages → my-art-gallery → Settings → Variables and Secrets**. The non-secret production hostname and sender values live in `wrangler.jsonc`, which is the deployment source of truth; do not duplicate them in the dashboard. Production and preview configuration are separate. Redeploy after changing variables or secrets.
 
 ## Free-plan rate limiting
 
