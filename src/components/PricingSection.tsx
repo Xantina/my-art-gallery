@@ -36,7 +36,7 @@ export const PricingSection = () => {
     {
       image: illustrationIcon,
       title: 'Illustration',
-      price: '$150.00',
+      price: '$200.00',
       description: 'A detailed illustration of the character with a supporting background and/or elements to help tell the story.'
     }
   ];
